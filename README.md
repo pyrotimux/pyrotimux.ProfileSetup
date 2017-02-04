@@ -1,6 +1,6 @@
 win_profile_setup
 =========
-
+[![Build Status](https://travis-ci.org/pyrotimux/win_profile_setup.png?branch=master)](https://travis-ci.org/pyrotimux/win_profile_setup)
 Setup folders for windows roaming profile.
 
 Requirements

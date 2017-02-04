@@ -1,0 +1,30 @@
+---
+  - name: Create profile root
+    win_pc_file:
+      DestinationPath: "\\\\{{ file_server }}\\c$\\profiles"
+      Ensure: Present
+      Attributes: Hidden
+      Type: Directory
+      Force: True
+
+  - name: Create user profile
+    win_pc_file:
+      DestinationPath: "\\\\{{ file_server }}\\c$\\profiles\\{{ item.name }}"
+      Ensure: Present
+      Type: Directory
+      Force: True
+      PsDscRunAsCredential_username: "{{ item.name }}"
+      PsDscRunAsCredential_password: "{{ item.pass }}"
+    with_items: "{{ users }}"
+
+  - name: Add user profile items
+    win_pc_file:
+      DestinationPath: "\\\\{{ file_server }}\\c$\\profiles\\{{ item[0].name }}\\{{ item[1] }}"
+      Ensure: Present
+      Type: Directory
+      Force: True
+      PsDscRunAsCredential_username: "{{ item[0].name }}"
+      PsDscRunAsCredential_password: "{{ item[0].pass }}"
+    with_nested:
+      - "{{ users }}"
+      - "{{ folders }}"

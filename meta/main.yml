@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: Pyro
+  description: Setup folders for windows roaming profile.
+  company: None
+  license: MIT
+  min_ansible_version: '2.1.1'
+  github_branch: master
+  platforms:
+  - name: Windows
+    versions:
+      - all
+      - 2012R2
+  categories:
+  - system

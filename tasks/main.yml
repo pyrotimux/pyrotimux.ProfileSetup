@@ -1,7 +1,7 @@
 ---
   - name: Create profile root
     win_pc_file:
-      DestinationPath: "\\\\{{ file_server }}\\c$\\profiles"
+      DestinationPath: "\\\\{{ file_server }}"
       Ensure: Present
       Attributes: Hidden
       Type: Directory
@@ -9,7 +9,7 @@
 
   - name: Create user profile
     win_pc_file:
-      DestinationPath: "\\\\{{ file_server }}\\c$\\profiles\\{{ item.name }}"
+      DestinationPath: "\\\\{{ file_server }}\\{{ item.name }}"
       Ensure: Present
       Type: Directory
       Force: True

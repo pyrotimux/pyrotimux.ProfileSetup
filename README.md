@@ -1,6 +1,6 @@
 win_profile_setup
 =========
-[![Build Status](https://travis-ci.org/pyrotimux/win_profile_setup.png?branch=master)](https://travis-ci.org/pyrotimux/win_profile_setup)
+[![Build Status](https://travis-ci.org/pyrotimux/pyrotimux.ProfileSetup.png?branch=master)](https://travis-ci.org/pyrotimux/pyrotimux.ProfileSetup)
 Setup folders for windows roaming profile.
 
 Requirements
@@ -20,7 +20,8 @@ Please pass in the variable below. Example is shown below.
     - { name: 'yonban', pass: 'yonV@gran7'}
 
 # name of the file server.
-  file_server: KGSTRGUTL
+# If my file server is KGSTRGUTL and drive is c$ and path is profiles then
+  file_server: KGSTRGUTL\\c$\\profiles
 ```
 
 Dependencies

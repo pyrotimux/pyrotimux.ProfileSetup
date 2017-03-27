@@ -19,7 +19,7 @@
 
   - name: Add user profile items
     win_pc_file:
-      DestinationPath: "\\\\{{ file_server }}\\c$\\profiles\\{{ item[0].name }}\\{{ item[1] }}"
+      DestinationPath: "\\\\{{ file_server }}\\{{ item[0].name }}\\{{ item[1] }}"
       Ensure: Present
       Type: Directory
       Force: True

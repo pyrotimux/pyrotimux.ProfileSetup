@@ -1,15 +1,33 @@
 ---
+  - name: Download
+    win_oneget:
+      name: "xSmbShare"
+
   - name: Create profile root
     win_pc_file:
-      DestinationPath: "\\\\{{ file_server }}"
+      DestinationPath: "{{ profile_path }}"
       Ensure: Present
-      Attributes: Hidden
       Type: Directory
       Force: True
 
+  - name: Share profile folders
+    win_ad_xsmbshare:
+      name: profiles
+      description: top secret profiles
+      FullAccess: "{{ domainnetbios }}\\{{ user_group_str }}"
+      path: "{{ profile_path }}"
+
+  - name: Setup perms for profile root
+    ps_winacl:
+      Path: "{{ profile_path }}"
+      User: "{{ item }}"
+      Permissions: Write, Read, Synchronize
+    with_items:
+      - "{{ user_group }}"
+
   - name: Create user profile
     win_pc_file:
-      DestinationPath: "\\\\{{ file_server }}\\{{ item.name }}"
+      DestinationPath: "{{ profile_path }}\\{{ item.name }}"
       Ensure: Present
       Type: Directory
       Force: True
@@ -19,7 +37,7 @@
 
   - name: Add user profile items
     win_pc_file:
-      DestinationPath: "\\\\{{ file_server }}\\{{ item[0].name }}\\{{ item[1] }}"
+      DestinationPath: "{{ profile_path }}\\{{ item[0].name }}\\{{ item[1] }}"
       Ensure: Present
       Type: Directory
       Force: True
@@ -28,3 +46,15 @@
     with_nested:
       - "{{ users }}"
       - "{{ folders }}"
+
+  - name: Setup perms for home dir
+    ps_winacl:
+      Path: "{{ profile_path }}\\{{ item.name }}"
+      User: "{{ item.name }}"
+      Permissions: FullControl
+      InheritFlags: ContainerInherit, ObjectInherit
+    with_items:
+      - "{{ users }}"
+
+
+

@@ -22,6 +22,15 @@ Please pass in the variable below. Example is shown below.
 # name of the file server.
 # If my file server is KGSTRGUTL and drive is c$ and path is profiles then
   file_server: KGSTRGUTL\\c$\\profiles
+
+  profile_path: C:\profiles
+  user_group_str: "Accounting, IT"
+  user_group:
+    - "Accounting"
+    - "IT"
+
+
+  domainnetbios: kg
 ```
 
 Dependencies

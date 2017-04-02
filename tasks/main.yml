@@ -14,7 +14,7 @@
     win_ad_xsmbshare:
       name: profiles
       description: top secret profiles
-      FullAccess: "{{ domainnetbios }}\\{{ user_group_str }}"
+      FullAccess: "{{ domainnetbios }}\\{{ user_group | join(',') }}"
       path: "{{ profile_path }}"
 
   - name: Setup perms for profile root

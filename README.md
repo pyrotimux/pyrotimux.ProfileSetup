@@ -24,7 +24,6 @@ Please pass in the variable below. Example is shown below.
   file_server: KGSTRGUTL\\c$\\profiles
 
   profile_path: C:\profiles
-  user_group_str: "Accounting, IT"
   user_group:
     - "Accounting"
     - "IT"
